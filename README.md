@@ -1,17 +1,20 @@
-# Проект: Место
+# Mesto Project
 
-### Обзор
+### Stack
 
 * Figma
-* Картинки
+* HTML5
+* CSS3
+* Responsive Layout
+* JavaScript
+* BEM
+* Git
 
-**Figma**
+**Description**
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+This is my third big project for Yandex.Practicum: the social media platform for travelers across Russia - make your profile, update it with new info and photos from your trips.
 
-**Картинки**
+**Link to the project**
+Please go to [GitHub-Pages](https://tinypng.com/) to see it.
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+Thank you!

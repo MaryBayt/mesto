@@ -1,0 +1,17 @@
+.profile__section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@media screen and (max-width: 992px) {
+  .profile__section {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .profile__section {
+    flex-direction: column;
+  }
+}
