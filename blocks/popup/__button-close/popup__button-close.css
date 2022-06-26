@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.popup__button-close:hover {
+  opacity: .6;
+}
+
 @media screen and (max-width: 992px) {
   .popup__button-close {
     background: url(../../../images/close-icon-small.svg);

@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+.popup__button-save:hover {
+  background: rgba(0, 0, 0, .8);
+}
+
 @media screen and (max-width: 992px) {
   .popup__button-save {
     width: 238px;
