@@ -1,5 +1,5 @@
 .place__button-like {
-  background: url(/images/heart-empty.svg);
+  background: url(../../../images/heart-empty.svg);
   background-repeat: no-repeat;
   background-position: center;
   border: none;
