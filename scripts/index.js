@@ -6,10 +6,6 @@ const editButton = document.querySelector('.profile__edit-button');
 const popupCloseButton = document.querySelector('.popup__button-close');
 const saveButton = document.querySelector('.popup__button-save');
 
-document.querySelector('.popup__container').addEventListener('click', (event) => {
-  event.preventDefault();
-})
-
 // function for opening popup
 function openPopup(event) {
   popup.classList.add('popup_opened');
@@ -17,9 +13,7 @@ function openPopup(event) {
 
 // function for closing popup
 function closePopup(event) {
-  if(!event.defaultPrevented) {
     popup.classList.remove('popup_opened');
-  }
 }
 
 // open by clicking on edit button
@@ -50,4 +44,3 @@ function formSubmitHandler (event) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
-
