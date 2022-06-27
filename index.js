@@ -1,43 +1,53 @@
-const editButton = document.querySelector('.profile__edit-button');
+// choose popup
 const popup = document.querySelector('.popup');
-const popupCloseButton = document.querySelector('.popup__button-close');
 
-editButton.addEventListener('click', (event) => {
-  popup.classList.add('popup_opened');
-})
+// choose buttons
+const editButton = document.querySelector('.profile__edit-button');
+const popupCloseButton = document.querySelector('.popup__button-close');
+const saveButton = document.querySelector('.popup__button-save');
 
 document.querySelector('.popup__container').addEventListener('click', (event) => {
   event.preventDefault();
 })
 
-popupCloseButton.addEventListener('click', (event) => {
+// function for opening popup
+function openPopup(event) {
+  popup.classList.add('popup_opened');
+}
+
+// function for closing popup
+function closePopup(event) {
   if(!event.defaultPrevented) {
     popup.classList.remove('popup_opened');
   }
-})
+}
+
+// open by clicking on edit button
+editButton.addEventListener('click', openPopup);
+
+// close by clicking on close button
+popupCloseButton.addEventListener('click', closePopup);
 
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__form');
 // Находим поля формы в DOM
 let nameInput = document.querySelector('.popup__input_value_name');
 let jobInput = document.querySelector('.popup__input_value_about');
-
+// Получите значение полей jobInput и nameInput из свойства value
+let nameValue = nameInput.value;
+let jobValue = jobInput.value;
+// Выберите элементы, куда должны быть вставлены значения полей
+let profileName = document.querySelector('.profile__name');
+let profileJob = document.querySelector('.profile__about');
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
-function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
+function formSubmitHandler (event) {
+    event.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
-    // Получите значение полей jobInput и nameInput из свойства value
-    let nameValue = nameInput.getAttribute('value');
-    let jobValue = jobInput.getAttribute('value');
-    // Выберите элементы, куда должны быть вставлены значения полей
-    let profileName = document.querySelector('.profile__name');
-    let profileJob = document.querySelector('.profile__about');
     // Вставьте новые значения с помощью textContent
     profileName.textContent = nameValue;
     profileJob.textContent = jobValue;
+    closePopup();
 }
 
 // Прикрепляем обработчик к форме:
