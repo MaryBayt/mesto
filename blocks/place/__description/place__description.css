@@ -1,7 +1,7 @@
 .place__description {
-  background-color: #FFFFFF;
+  background-color: #FFF;
   display: flex;
-  color: #000000;
+  color: #000;
   min-height: 80px;
   border-radius: 0 0 10px 10px;
   align-items: center;
