@@ -30,6 +30,7 @@
 
 /* place card */
 @import url(../blocks/place/place.css);
+@import url(../blocks/place/__button-delete/place__button-delete.css);
 @import url(../blocks/place/__pic/place__pic.css);
 @import url(../blocks/place/__description/place__description.css);
 @import url(../blocks/place/__title/place__title.css);
