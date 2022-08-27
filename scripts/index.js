@@ -95,6 +95,7 @@ function deleteCard(evt) {
 function addCard(cardName, cardLink) {
   const cardElement = cardTemplate.querySelector('.place').cloneNode(true);
   cardElement.querySelector('.place__pic').src = cardLink;
+  cardElement.querySelector('.place__pic').alt = cardName;
   cardElement.querySelector('.place__title').textContent = cardName;
 
   // like listener
@@ -180,6 +181,7 @@ const popupClosePhoto = popupZoom.querySelector('.popup__button-close');
 function openPhoto(evt) {
   popupZoom.classList.add('popup_opened');
   zoomPhoto.src = evt.target.closest('.place__pic').src;
+  zoomPhoto.alt = evt.target.closest('.place__pic').alt;
   zoomName.textContent = evt.target.parentElement.querySelector('.place__title').textContent;
 }
 
