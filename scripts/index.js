@@ -105,6 +105,9 @@ function addCard(cardName, cardLink) {
   const buttonDelete = cardElement.querySelector('.place__button-delete');
   buttonDelete.addEventListener('click', deleteCard);
 
+  // zoom listener
+  cardElement.querySelector('.place__pic').addEventListener('click', openPhoto);
+
   return(cardElement);
 }
 
@@ -163,3 +166,27 @@ function addCardFormSubmitHandler (event) {
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formAddCard.addEventListener('submit', addCardFormSubmitHandler);
+
+
+// open whole photo popup
+// choose whole photo popup
+const popupZoom = document.querySelector('.popup_zoom');
+
+const zoomPhoto = document.querySelector('.popup__photo');
+const zoomName = document.querySelector('.popup__description');
+const popupClosePhoto = popupZoom.querySelector('.popup__button-close');
+
+// open whole photo popup
+function openPhoto(evt) {
+  popupZoom.classList.add('popup_opened');
+  zoomPhoto.src = evt.target.closest('.place__pic').src;
+  zoomName.textContent = evt.target.parentElement.querySelector('.place__title').textContent;
+}
+
+// close whole photo popup
+function closePhoto(evt) {
+    popupZoom.classList.remove('popup_opened');
+}
+
+// close it by clicking on close button
+popupClosePhoto.addEventListener('click', closePhoto);
