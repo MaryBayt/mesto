@@ -1,25 +1,25 @@
-// choose popup
+// choose edit profile popup
 const popup = document.querySelector('.popup');
 
-// choose buttons
+// choose its buttons
 const editButton = document.querySelector('.profile__edit-button');
 const popupCloseButton = document.querySelector('.popup__button-close');
 const saveButton = document.querySelector('.popup__button-save');
 
-// open popup
+// open edit profile popup
 function openPopup(event) {
   popup.classList.add('popup_opened');
 }
 
-// close popup
+// close edit profile popup
 function closePopup(event) {
     popup.classList.remove('popup_opened');
 }
 
-// open by clicking on edit button
+// open it by clicking on edit button
 editButton.addEventListener('click', openPopup);
 
-// close by clicking on close button
+// close it by clicking on close button
 popupCloseButton.addEventListener('click', closePopup);
 
 // Находим форму в DOM
@@ -115,4 +115,51 @@ initialCards.forEach(function (element) {
 }
 )
 
+// popup to open & add new card
 
+// choose add new card popup
+const popupAddCard = document.querySelector('.popup_card');
+
+// choose its buttons
+const addCardButton = document.querySelector('.profile__add-button');
+const popupCloseCardButton = popupAddCard.querySelector('.popup__button-close');
+const saveCardButton = popupAddCard.querySelector('.popup__button-save');
+
+// open add new card popup
+function openAddCardPopup(event) {
+  popupAddCard.classList.add('popup_opened');
+}
+
+// close add new card popup
+function closeAddCardPopup(event) {
+    popupAddCard.classList.remove('popup_opened');
+}
+
+// open it by clicking on add new card button
+addCardButton.addEventListener('click', openAddCardPopup);
+
+// close it by clicking on close button
+popupCloseCardButton.addEventListener('click', closeAddCardPopup);
+
+// Находим форму в DOM
+let formAddCard = document.querySelector('.popup__form_card');
+// Находим поля формы в DOM
+let placeInput = document.querySelector('.popup__input_value_place');
+let linkInput = document.querySelector('.popup__input_value_link');
+// // Выбераем элементы, куда должны быть вставлены значения полей
+// let placeTitle = document.querySelector('.place__title');
+// let placeLink = document.querySelector('.place__pic');
+// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
+function addCardFormSubmitHandler (event) {
+    event.preventDefault(); // отменяем стандартную отправку формы
+
+    // Вставляем новые значения и добавляем новую карточку
+    cardsContainer.prepend(addCard(placeInput.value, linkInput.value));
+    formAddCard.reset();
+
+    closeAddCardPopup();
+}
+
+// Прикрепляем обработчик к форме:
+// он будет следить за событием “submit” - «отправка»
+formAddCard.addEventListener('submit', addCardFormSubmitHandler);
