@@ -48,14 +48,14 @@
     </footer>
 
     <!-- popup section - edit profile -->
-    <section class="popup">
+    <section class="popup popup_edit">
       <div class="popup__container">
-        <button class="popup__button-close" type="button" name="Закрыть"></button>
+        <button class="popup__button-close popup__button-close_edit" type="button" name="Закрыть"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" id="popup__form" name="popup__form">
+        <form class="popup__form popup__form_edit" id="popup__form" name="popup__form">
           <input type="text" class="popup__input popup__input_value_name" name="popup__input_value_name" id="popup__input_value_name" value="Жак-Ив Кусто" placeholder="Жак-Ив Кусто">
           <input type="text" class="popup__input popup__input_value_about" name="popup__input_value_about" id="popup__input_value_about" value="Исследователь океана" placeholder="Исследователь океана">
-          <button class="popup__button-save" type="submit" form="popup__form" name="Сохранить">Сохранить</button>
+          <button class="popup__button-save popup__button-save_edit" type="submit" form="popup__form" name="Сохранить">Сохранить</button>
         </form>
       </div>
     </section>
@@ -63,12 +63,12 @@
     <!-- popup section - add new card -->
     <section class="popup popup_card">
       <div class="popup__container">
-        <button class="popup__button-close" type="button" name="Закрыть"></button>
+        <button class="popup__button-close popup__button-close_card" type="button" name="Закрыть"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form popup__form_card" id="popup__form_card" name="popup__form_card">
           <input type="text" class="popup__input popup__input_value_place" name="popup__input_value_place" id="popup__input_value_place" value="Название" placeholder="Название">
-          <input type="text" class="popup__input popup__input_value_link" name="popup__input_value_link" id="popup__input_value_link" value="Ссылка на картинку" placeholder="Ссылка на картинку">
-          <button class="popup__button-save" type="submit" form="popup__form_card" name="Сохранить">Сохранить</button>
+          <input type="text" class="popup__input popup__input_value_link" name="popup__input_value_link" id="popup__input_value_link" value="Ссылка на картинку" placeholder="Ссылка на картинку" type="url">
+          <button class="popup__button-save popup__button-save_card" type="submit" form="popup__form_card" name="Сохранить">Сохранить</button>
         </form>
       </div>
     </section>
@@ -76,7 +76,7 @@
     <!-- popup section - to see the whole photo -->
     <div class="popup popup_zoom">
       <figure class="popup__photo-container">
-        <button class="popup__button-close" type="button" name="Закрыть"></button>
+        <button class="popup__button-close popup__button-close_zoom" type="button" name="Закрыть"></button>
         <img class="popup__photo" src="#" alt="#">
         <figcaption class="popup__description"></figcaption>
       </figure>
@@ -90,12 +90,13 @@
       <button class="place__button-delete" type="button"></button>
       <img class="place__pic" src="#" alt="#">
       <div class="place__description">
-        <h2 class="place__title"></h2>
+        <h2 class="place__name"></h2>
         <button class="place__button-like" type="button"></button>
       </div>
     </li>
   </template>
 
+  <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 </html>

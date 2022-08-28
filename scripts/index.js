@@ -1,85 +1,76 @@
-// choose edit profile popup
-const popup = document.querySelector('.popup');
+// all const
 
-// choose its buttons
+// profile name and job
+let profileName = document.querySelector('.profile__name');
+let profileJob = document.querySelector('.profile__about');
+
+// edit button
 const editButton = document.querySelector('.profile__edit-button');
-const popupCloseButton = document.querySelector('.popup__button-close');
-const saveButton = document.querySelector('.popup__button-save');
+// edit profile popup
+const popupEdit = document.querySelector('.popup_edit');
+// its buttons
+const popupCloseEditButton = document.querySelector('.popup__button-close_edit');
+// const saveEditButton = document.querySelector('.popup__button-save_edit');
+// edit form
+const formEdit = document.querySelector('.popup__form_edit');
+// edit form inputs
+const nameInput = document.querySelector('.popup__input_value_name');
+const jobInput = document.querySelector('.popup__input_value_about');
 
-// open edit profile popup
-function openPopup(event) {
+// add new card button
+const addCardButton = document.querySelector('.profile__add-button');
+// add new card popup
+const popupAddCard = document.querySelector('.popup_card');
+// its buttons
+const popupCloseAddCardButton = document.querySelector('.popup__button-close_card');
+// const saveCardButton = document.querySelector('.popup__button-save_card');
+// add form
+const formAddCard = document.querySelector('.popup__form_card');
+// add form inputs
+const placeInput = document.querySelector('.popup__input_value_place');
+const linkInput = document.querySelector('.popup__input_value_link');
+
+// place to insert new cards in
+const cardsContainer = document.querySelector('.places__list');
+// template for cards
+const cardTemplate = document.querySelector('#card-template').content;
+
+// card
+const card = cardTemplate.querySelector('.place');
+
+// zoom photo popup
+const popupZoom = document.querySelector('.popup_zoom');
+// its parts
+const zoomPhoto = document.querySelector('.popup__photo');
+const zoomName = document.querySelector('.popup__description');
+const popupClosePhoto = document.querySelector('.popup__button-close_zoom');
+
+
+
+// all functions
+
+// open popup
+function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
-// close edit profile popup
-function closePopup(event) {
-    popup.classList.remove('popup_opened');
+// close popup
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
-// open it by clicking on edit button
-editButton.addEventListener('click', openPopup);
+// submit edit form
+function handleEditFormSubmit (event) {
+    event.preventDefault(); // cancel default submit action
 
-// close it by clicking on close button
-popupCloseButton.addEventListener('click', closePopup);
-
-// Находим форму в DOM
-let formElement = document.querySelector('.popup__form');
-// Находим поля формы в DOM
-let nameInput = document.querySelector('.popup__input_value_name');
-let jobInput = document.querySelector('.popup__input_value_about');
-// Выбераем элементы, куда должны быть вставлены значения полей
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__about');
-// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
-function formSubmitHandler (event) {
-    event.preventDefault(); // отменяем стандартную отправку формы
-
-    // Вставляем новые значения с помощью textContent
+    // fill in with new values with textContent
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-    closePopup();
+
+    closePopup(popupEdit);
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', formSubmitHandler);
-
-
-
 // sprint 5
-//initial cards
-
-const initialCards = [
-  {
-    name: 'Сергиев Посад',
-    link: 'https://images.unsplash.com/photo-1597090549178-6aa79b7cc9ac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2944&q=80'
-  },
-  {
-    name: 'Челябинск',
-    link: 'https://images.unsplash.com/photo-1589793242094-496c3f75bcea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2831&q=80'
-  },
-  {
-    name: 'Коломна',
-    link: 'https://images.unsplash.com/photo-1644942180288-ae34ecd7bae3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80'
-  },
-  {
-    name: 'Тверь',
-    link: 'https://images.unsplash.com/photo-1628173893879-99ce5cd0dbea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2942&q=80'
-  },
-  {
-    name: 'Питер',
-    link: 'https://images.unsplash.com/photo-1603955129944-7f2dbff89b04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80'
-  },
-  {
-    name: 'Москва',
-    link: 'https://images.unsplash.com/photo-1578632220633-824351c0b694?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2940&q=80'
-  }
-];
-
-//all const that we need
-const cardTemplate = document.querySelector('#card-template').content;
-const cardsContainer = document.querySelector('.places__list');
-
 // like photo
 function likeCard(evt) {
   evt.target.classList.toggle('place__button-like_state_active');
@@ -91,104 +82,68 @@ function deleteCard(evt) {
   oldCard.remove();
 }
 
-// add a new card
-function addCard(cardName, cardLink) {
-  const cardElement = cardTemplate.querySelector('.place').cloneNode(true);
-  cardElement.querySelector('.place__pic').src = cardLink;
-  cardElement.querySelector('.place__pic').alt = cardName;
-  cardElement.querySelector('.place__title').textContent = cardName;
-
+// make a new card
+function makeNewCard(cardName, cardLink) {
+  const newCard = card.cloneNode(true);
+  const newCardPicture = newCard.querySelector('.place__pic');
+  newCardPicture.src = cardLink;
+  newCardPicture.alt = cardName;
+  newCard.querySelector('.place__name').textContent = cardName;
   // like listener
-  const buttonLike = cardElement.querySelector('.place__button-like');
+  const buttonLike = newCard.querySelector('.place__button-like');
   buttonLike.addEventListener('click', likeCard);
-
-  // delete listener
-  const buttonDelete = cardElement.querySelector('.place__button-delete');
+  // delete card listener
+  const buttonDelete = newCard.querySelector('.place__button-delete');
   buttonDelete.addEventListener('click', deleteCard);
-
-  // zoom listener
-  cardElement.querySelector('.place__pic').addEventListener('click', openPhoto);
-
-  return(cardElement);
+  // zoom in card listener
+  newCardPicture.addEventListener('click', openPhoto);
+  return(newCard);
 }
 
-// add initial cards
-initialCards.forEach(function (element) {
-  const defaultCard = addCard(element.name, element.link);
+// add initial cards from cards.js
+initialCards.forEach(function (cardData) {
+  const defaultCard = makeNewCard(cardData.name, cardData.link);
   cardsContainer.prepend(defaultCard);
 }
 )
 
-// popup to open & add new card
+// submit add card form
+function handleAddCardFormSubmit (event) {
+    event.preventDefault(); // cancel default submit action
 
-// choose add new card popup
-const popupAddCard = document.querySelector('.popup_card');
-
-// choose its buttons
-const addCardButton = document.querySelector('.profile__add-button');
-const popupCloseCardButton = popupAddCard.querySelector('.popup__button-close');
-const saveCardButton = popupAddCard.querySelector('.popup__button-save');
-
-// open add new card popup
-function openAddCardPopup(event) {
-  popupAddCard.classList.add('popup_opened');
-}
-
-// close add new card popup
-function closeAddCardPopup(event) {
-    popupAddCard.classList.remove('popup_opened');
-}
-
-// open it by clicking on add new card button
-addCardButton.addEventListener('click', openAddCardPopup);
-
-// close it by clicking on close button
-popupCloseCardButton.addEventListener('click', closeAddCardPopup);
-
-// Находим форму в DOM
-let formAddCard = document.querySelector('.popup__form_card');
-// Находим поля формы в DOM
-let placeInput = document.querySelector('.popup__input_value_place');
-let linkInput = document.querySelector('.popup__input_value_link');
-// // Выбераем элементы, куда должны быть вставлены значения полей
-// let placeTitle = document.querySelector('.place__title');
-// let placeLink = document.querySelector('.place__pic');
-// Обработчик «отправки» формы, хотя пока она никуда отправляться не будет
-function addCardFormSubmitHandler (event) {
-    event.preventDefault(); // отменяем стандартную отправку формы
-
-    // Вставляем новые значения и добавляем новую карточку
-    cardsContainer.prepend(addCard(placeInput.value, linkInput.value));
+    // fill in with new values and add a new card
+    cardsContainer.prepend(makeNewCard(placeInput.value, linkInput.value));
     formAddCard.reset();
 
-    closeAddCardPopup();
+    closePopup(popupAddCard);
 }
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
-formAddCard.addEventListener('submit', addCardFormSubmitHandler);
-
-
-// open whole photo popup
-// choose whole photo popup
-const popupZoom = document.querySelector('.popup_zoom');
-
-const zoomPhoto = document.querySelector('.popup__photo');
-const zoomName = document.querySelector('.popup__description');
-const popupClosePhoto = popupZoom.querySelector('.popup__button-close');
 
 // open whole photo popup
 function openPhoto(evt) {
-  popupZoom.classList.add('popup_opened');
+  openPopup(popupZoom);
   zoomPhoto.src = evt.target.closest('.place__pic').src;
   zoomPhoto.alt = evt.target.closest('.place__pic').alt;
-  zoomName.textContent = evt.target.parentElement.querySelector('.place__title').textContent;
+  zoomName.textContent = evt.target.parentElement.querySelector('.place__name').textContent;
 }
 
-// close whole photo popup
-function closePhoto(evt) {
-    popupZoom.classList.remove('popup_opened');
-}
 
+
+
+// all listeners
+
+// open edit popup by clicking on edit button
+editButton.addEventListener('click', () => openPopup(popupEdit));
 // close it by clicking on close button
-popupClosePhoto.addEventListener('click', closePhoto);
+popupCloseEditButton.addEventListener('click', () => closePopup(popupEdit));
+// submit edit form listener
+formEdit.addEventListener('submit', handleEditFormSubmit);
+
+// open add new card popup by clicking on add new card button
+addCardButton.addEventListener('click', () => openPopup(popupAddCard));
+// close it by clicking on close button
+popupCloseAddCardButton.addEventListener('click', () => closePopup(popupAddCard));
+// submit add new card form listener
+formAddCard.addEventListener('submit', handleAddCardFormSubmit);
+
+// close zoom popup by clicking on close button
+popupClosePhoto.addEventListener('click', () => closePopup(popupZoom));
