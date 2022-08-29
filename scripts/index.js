@@ -1,8 +1,8 @@
 // all const
 
 // profile name and job
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__about');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__about');
 
 // edit button
 const editButton = document.querySelector('.profile__edit-button');
@@ -97,7 +97,7 @@ function makeNewCard(cardName, cardLink) {
   buttonDelete.addEventListener('click', deleteCard);
   // zoom in card listener
   newCardPicture.addEventListener('click', openPhoto);
-  return(newCard);
+  return newCard;
 }
 
 // add initial cards from cards.js
@@ -120,10 +120,10 @@ function handleAddCardFormSubmit (event) {
 
 // open whole photo popup
 function openPhoto(evt) {
-  openPopup(popupZoom);
   zoomPhoto.src = evt.target.closest('.place__pic').src;
   zoomPhoto.alt = evt.target.closest('.place__pic').alt;
   zoomName.textContent = evt.target.parentElement.querySelector('.place__name').textContent;
+  openPopup(popupZoom);
 }
 
 
