@@ -54,6 +54,13 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
 }
 
+// open edit popup
+function openEditPopup(popup) {
+  nameInput.textContent = profileName.textContent;
+  jobInput.textContent = profileJob.textContent;
+  openPopup(popup);
+}
+
 // close popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -132,7 +139,7 @@ function openPhoto(evt) {
 // all listeners
 
 // open edit popup by clicking on edit button
-editButton.addEventListener('click', () => openPopup(popupEdit));
+editButton.addEventListener('click', () => openEditPopup(popupEdit));
 // close it by clicking on close button
 popupCloseEditButton.addEventListener('click', () => closePopup(popupEdit));
 // submit edit form listener
