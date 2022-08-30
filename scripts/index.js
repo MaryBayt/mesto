@@ -56,8 +56,8 @@ function openPopup(popup) {
 
 // open edit popup
 function openEditPopup(popup) {
-  nameInput.textContent = profileName.textContent;
-  jobInput.textContent = profileJob.textContent;
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
   openPopup(popup);
 }
 
