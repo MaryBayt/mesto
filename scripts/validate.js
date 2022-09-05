@@ -1,3 +1,4 @@
+// sprint 6
 // show error & error message
 function showInputError (form, input, config) {
   const error = form.parentNode.querySelector(`#${input.id}-error`);

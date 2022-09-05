@@ -9,3 +9,10 @@
   height: 14px;
 }
 
+/*
+will add after final review to delete the default blue outline
+
+.popup__input:active, .popup__input:hover, .popup__input:focus {
+  outline: 0;
+  outline-offset: 0;
+} */

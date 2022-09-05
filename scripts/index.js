@@ -52,22 +52,26 @@ const popupClosePhoto = document.querySelector('.popup__button-close_zoom');
 // open popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-}
+  document.addEventListener('keydown', closeOnEsc);
+  document.addEventListener('click', closeOnOverlay);
+};
 
 // open edit popup
 function openEditPopup(popup) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popup);
-}
+};
 
 // close popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-}
+  document.removeEventListener('keydown', closeOnEsc);
+  document.removeEventListener('click', closeOnOverlay);
+};
 
 // submit edit form
-function handleEditFormSubmit (event) {
+function handleEditFormSubmit(event) {
     event.preventDefault(); // cancel default submit action
 
     // fill in with new values with textContent
@@ -75,19 +79,19 @@ function handleEditFormSubmit (event) {
     profileJob.textContent = jobInput.value;
 
     closePopup(popupEdit);
-}
+};
 
 // sprint 5
 // like photo
 function likeCard(evt) {
   evt.target.classList.toggle('place__button-like_state_active');
-}
+};
 
 // delete card
 function deleteCard(evt) {
   const oldCard = evt.target.closest('.place');
   oldCard.remove();
-}
+};
 
 // make a new card
 function makeNewCard(cardName, cardLink) {
@@ -105,17 +109,17 @@ function makeNewCard(cardName, cardLink) {
   // zoom in card listener
   newCardPicture.addEventListener('click', openPhoto);
   return newCard;
-}
+};
 
 // add initial cards from cards.js
 initialCards.forEach(function (cardData) {
   const defaultCard = makeNewCard(cardData.name, cardData.link);
   cardsContainer.prepend(defaultCard);
 }
-)
+);
 
 // submit add card form
-function handleAddCardFormSubmit (event) {
+function handleAddCardFormSubmit(event) {
     event.preventDefault(); // cancel default submit action
 
     // fill in with new values and add a new card
@@ -123,7 +127,7 @@ function handleAddCardFormSubmit (event) {
     formAddCard.reset();
 
     closePopup(popupAddCard);
-}
+};
 
 // open whole photo popup
 function openPhoto(evt) {
@@ -131,8 +135,22 @@ function openPhoto(evt) {
   zoomPhoto.alt = evt.target.closest('.place__pic').alt;
   zoomName.textContent = evt.target.parentElement.querySelector('.place__name').textContent;
   openPopup(popupZoom);
-}
+};
 
+// sprint 6
+// close popup with Esc key
+function closeOnEsc(evt) {
+  const popup = document.querySelector('.popup_opened');
+  evt.key === 'Escape' && popup ? closePopup(popup) : document.removeEventListener('keydown', closeOnEsc);
+};
+
+// close popup with clicking on overlay
+function closeOnOverlay(evt) {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.target === popup) {
+    closePopup(popup);
+  }
+};
 
 
 
