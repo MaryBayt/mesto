@@ -99,7 +99,7 @@ function enableValidation (config) {
 };
 
 // all classes and elements that will be used
-enableValidation({
+const newValidation = enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-save',

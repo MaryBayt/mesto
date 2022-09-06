@@ -23,7 +23,7 @@ const addCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_card');
 // its buttons
 const popupCloseAddCardButton = document.querySelector('.popup__button-close_card');
-// const saveCardButton = document.querySelector('.popup__button-save_card');
+const saveCardButton = document.querySelector('.popup__button-save_card');
 // add form
 const formAddCard = document.querySelector('.popup__form_card');
 // add form inputs
@@ -54,6 +54,11 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeOnEsc);
   document.addEventListener('click', closeOnOverlay);
+  if (popup.classList.contains('popup_card') && (!placeInput.validity.valid || !linkInput.validity.valid)) {
+    saveCardButton.setAttribute('disabled', true);
+    saveCardButton.classList.remove('popup__button-save_state_active');
+    saveCardButton.classList.add('popup__button-save_state_disabled');
+  }
 };
 
 // open edit popup
@@ -140,8 +145,10 @@ function openPhoto(evt) {
 // sprint 6
 // close popup with Esc key
 function closeOnEsc(evt) {
-  const popup = document.querySelector('.popup_opened');
-  evt.key === 'Escape' && popup ? closePopup(popup) : document.removeEventListener('keydown', closeOnEsc);
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
 };
 
 // close popup with clicking on overlay
@@ -159,6 +166,7 @@ function closeOnOverlay(evt) {
 // open edit popup by clicking on edit button
 editButton.addEventListener('click', () => openEditPopup(popupEdit));
 // close it by clicking on close button
+// NEED TO REFACTOR - see the instructions in review 1 ---------------------------------------------------
 popupCloseEditButton.addEventListener('click', () => closePopup(popupEdit));
 // submit edit form listener
 formEdit.addEventListener('submit', handleEditFormSubmit);
