@@ -44,19 +44,27 @@ function hasInvalidInput (inputList) {
 // toggle the state of the save button
 function toggleButtonState (inputList, buttonElement, config) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.setAttribute('disabled', true);
-    buttonElement.classList.remove(config.activeButtonClass);
-    buttonElement.classList.add(config.inactiveButtonClass);
+    disableSaveButton(buttonElement, config.activeButtonClass, config.inactiveButtonClass);
     //debug
     console.log('переключаю кнопку на неактивную');
   } else {
-    buttonElement.removeAttribute('disabled', true);
-    buttonElement.classList.remove(config.inactiveButtonClass);
-    buttonElement.classList.add(config.activeButtonClass);
+    enableSaveButton (buttonElement, config.inactiveButtonClass, config.activeButtonClass);
     //debug
     console.log('переключаю кнопку на активную');
   }
 };
+
+function disableSaveButton (button, activeButtonClass, inactiveButtonClass) {
+  button.setAttribute('disabled', true);
+  button.classList.remove(activeButtonClass);
+  button.classList.add(inactiveButtonClass);
+}
+
+function enableSaveButton (button, inactiveButtonClass, activeButtonClass) {
+  button.removeAttribute('disabled', true);
+  button.classList.remove(inactiveButtonClass);
+  button.classList.add(activeButtonClass);
+}
 
 // main function - validate inputs and toggle the save button
 function setEventListeners (form, config) {
@@ -99,7 +107,7 @@ function enableValidation (config) {
 };
 
 // all classes and elements that will be used
-const config = {
+enableValidation ({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-save',
@@ -107,13 +115,7 @@ const config = {
   activeButtonClass: 'popup__button-save_state_active',
   inputErrorClass: 'popup__input_error',
   activeErrorClass: 'error_state_active',
-};
-
-function validateAgain () {
-  enableValidation(config);
-};
-
-validateAgain();
+});
 
 //debug
 console.log('я работаю');

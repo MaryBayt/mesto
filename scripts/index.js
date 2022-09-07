@@ -23,7 +23,11 @@ const addCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_card');
 // its buttons
 const popupCloseAddCardButton = document.querySelector('.popup__button-close_card');
-// const saveCardButton = document.querySelector('.popup__button-save_card');
+const saveCardButton = document.querySelector('.popup__button-save_card');
+const saveCardButtonStates = {
+  activeButtonClass: 'popup__button-save_state_active',
+  disabledButtonClass: 'popup__button-save_state_disabled',
+};
 // add form
 const formAddCard = document.querySelector('.popup__form_card');
 // add form inputs
@@ -127,6 +131,8 @@ function handleAddCardFormSubmit(event) {
     formAddCard.reset();
 
     closePopup(popupAddCard);
+    disableSaveButton(saveCardButton, saveCardButtonStates.activeButtonClass, saveCardButtonStates.disabledButtonClass);
+
 };
 
 // open whole photo popup
@@ -167,11 +173,7 @@ popupCloseEditButton.addEventListener('click', () => closePopup(popupEdit));
 formEdit.addEventListener('submit', handleEditFormSubmit);
 
 // open add new card popup by clicking on add new card button
-addCardButton.addEventListener('click', () => {
-  openPopup(popupAddCard);
-  validateAgain();
-  }
-);
+addCardButton.addEventListener('click', () => openPopup(popupAddCard));
 // close it by clicking on close button
 popupCloseAddCardButton.addEventListener('click', () => closePopup(popupAddCard));
 // submit add new card form listener
