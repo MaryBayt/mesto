@@ -99,7 +99,7 @@ function enableValidation (config) {
 };
 
 // all classes and elements that will be used
-enableValidation({
+const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-save',
@@ -107,7 +107,11 @@ enableValidation({
   activeButtonClass: 'popup__button-save_state_active',
   inputErrorClass: 'popup__input_error',
   activeErrorClass: 'error_state_active',
-});
+};
+
+function validateAgain () {
+  enableValidation(config);
+};
 
 //debug
 console.log('я работаю');

@@ -23,7 +23,7 @@ const addCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_card');
 // its buttons
 const popupCloseAddCardButton = document.querySelector('.popup__button-close_card');
-const saveCardButton = document.querySelector('.popup__button-save_card');
+// const saveCardButton = document.querySelector('.popup__button-save_card');
 // add form
 const formAddCard = document.querySelector('.popup__form_card');
 // add form inputs
@@ -54,11 +54,6 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closeOnEsc);
   document.addEventListener('click', closeOnOverlay);
-  if (popup.classList.contains('popup_card') && (!placeInput.validity.valid || !linkInput.validity.valid)) {
-    saveCardButton.setAttribute('disabled', true);
-    saveCardButton.classList.remove('popup__button-save_state_active');
-    saveCardButton.classList.add('popup__button-save_state_disabled');
-  }
 };
 
 // open edit popup
@@ -172,7 +167,11 @@ popupCloseEditButton.addEventListener('click', () => closePopup(popupEdit));
 formEdit.addEventListener('submit', handleEditFormSubmit);
 
 // open add new card popup by clicking on add new card button
-addCardButton.addEventListener('click', () => openPopup(popupAddCard));
+addCardButton.addEventListener('click', () => {
+  openPopup(popupAddCard);
+  validateAgain();
+  }
+);
 // close it by clicking on close button
 popupCloseAddCardButton.addEventListener('click', () => closePopup(popupAddCard));
 // submit add new card form listener
