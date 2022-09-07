@@ -113,5 +113,7 @@ function validateAgain () {
   enableValidation(config);
 };
 
+validateAgain();
+
 //debug
 console.log('я работаю');
