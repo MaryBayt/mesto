@@ -1,3 +1,7 @@
+import { initialCards } from './data.js';
+import FormValidator from './FormValidator.js';
+import Card from './Card.js';
+
 // all const
 
 // profile name and job
@@ -23,11 +27,6 @@ const addCardButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('.popup_card');
 // its buttons
 const popupCloseAddCardButton = document.querySelector('.popup__button-close_card');
-const saveCardButton = document.querySelector('.popup__button-save_card');
-const saveCardButtonStates = {
-  activeButtonClass: 'popup__button-save_state_active',
-  disabledButtonClass: 'popup__button-save_state_disabled',
-};
 // add form
 const formAddCard = document.querySelector('.popup__form_card');
 // add form inputs
@@ -50,6 +49,22 @@ const zoomName = document.querySelector('.popup__description');
 const popupClosePhoto = document.querySelector('.popup__button-close_zoom');
 
 
+// all classes and elements that will be used for validation
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_state_disabled',
+  activeButtonClass: 'popup__button-save_state_active',
+  inputErrorClass: 'popup__input_error',
+  activeErrorClass: 'error_state_active',
+};
+
+const addFormEditValidator = new FormValidator(validationConfig, formEdit);
+const addFormAddCardValidator = new FormValidator(validationConfig, formAddCard);
+
+addFormEditValidator.enableValidation();
+addFormAddCardValidator.enableValidation();
 
 // all functions
 
@@ -85,42 +100,18 @@ function handleEditFormSubmit(event) {
     closePopup(popupEdit);
 };
 
-// sprint 5
-// like photo
-function likeCard(evt) {
-  evt.target.classList.toggle('place__button-like_state_active');
-};
-
-// delete card
-function deleteCard(evt) {
-  const oldCard = evt.target.closest('.place');
-  oldCard.remove();
-};
-
 // make a new card
 function makeNewCard(cardName, cardLink) {
-  const newCard = card.cloneNode(true);
-  const newCardPicture = newCard.querySelector('.place__pic');
-  newCardPicture.src = cardLink;
-  newCardPicture.alt = cardName;
-  newCard.querySelector('.place__name').textContent = cardName;
-  // like listener
-  const buttonLike = newCard.querySelector('.place__button-like');
-  buttonLike.addEventListener('click', likeCard);
-  // delete card listener
-  const buttonDelete = newCard.querySelector('.place__button-delete');
-  buttonDelete.addEventListener('click', deleteCard);
-  // zoom in card listener
-  newCardPicture.addEventListener('click', openPhoto);
-  return newCard;
+  const newCard = new Card(cardName, cardLink, '#card-template', openPhoto);
+  return newCard.generateCard();
 };
 
-// add initial cards from cards.js
-initialCards.forEach(function (cardData) {
-  const defaultCard = makeNewCard(cardData.name, cardData.link);
-  cardsContainer.prepend(defaultCard);
-}
-);
+// add initial cards from data.js
+initialCards.forEach((cardData) => {
+  const defaultCard = new Card(cardData.name, cardData.link, '#card-template', openPhoto);
+  const cardElement = defaultCard.generateCard();
+  cardsContainer.prepend(cardElement);
+});
 
 // submit add card form
 function handleAddCardFormSubmit(event) {
@@ -131,15 +122,15 @@ function handleAddCardFormSubmit(event) {
     formAddCard.reset();
 
     closePopup(popupAddCard);
-    disableSaveButton(saveCardButton, saveCardButtonStates.activeButtonClass, saveCardButtonStates.disabledButtonClass);
+    addFormAddCardValidator.disableSaveButton();
 
 };
 
 // open whole photo popup
-function openPhoto(evt) {
-  zoomPhoto.src = evt.target.closest('.place__pic').src;
-  zoomPhoto.alt = evt.target.closest('.place__pic').alt;
-  zoomName.textContent = evt.target.parentElement.querySelector('.place__name').textContent;
+function openPhoto(cardName, cardLink) {
+  zoomPhoto.setAttribute('src', cardLink)
+  zoomPhoto.setAttribute('alt', cardName);
+  zoomName.textContent = cardName;
   openPopup(popupZoom);
 };
 

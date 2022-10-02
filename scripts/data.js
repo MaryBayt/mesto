@@ -1,5 +1,5 @@
 //initial cards
-const initialCards = [
+export const initialCards = [
   {
     name: 'Сергиев Посад',
     link: 'https://images.unsplash.com/photo-1597090549178-6aa79b7cc9ac?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2944&q=80'
