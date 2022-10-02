@@ -158,7 +158,7 @@ function closeOnOverlay(evt) {
 // open edit popup by clicking on edit button
 editButton.addEventListener('click', () => openEditPopup(popupEdit));
 // close it by clicking on close button
-// NEED TO REFACTOR - see the instructions in review 1 ---------------------------------------------------
+// NEED TO REFACTOR LATER - see the instructions in review 1/s6 ---------------------------------------------------
 popupCloseEditButton.addEventListener('click', () => closePopup(popupEdit));
 // submit edit form listener
 formEdit.addEventListener('submit', handleEditFormSubmit);
