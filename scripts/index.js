@@ -108,9 +108,8 @@ function makeNewCard(cardName, cardLink) {
 
 // add initial cards from data.js
 initialCards.forEach((cardData) => {
-  const defaultCard = new Card(cardData.name, cardData.link, '#card-template', openPhoto);
-  const cardElement = defaultCard.generateCard();
-  cardsContainer.prepend(cardElement);
+  const defaultCard = makeNewCard(cardData.name, cardData.link);
+  cardsContainer.prepend(defaultCard);
 });
 
 // submit add card form

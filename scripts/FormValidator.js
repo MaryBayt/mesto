@@ -100,15 +100,13 @@ export default class FormValidator {
 
   // initial function - prevent standard form behavior and set listeners to each input
   enableValidation () {
-    this._formList.forEach((form) => {
-      form.addEventListener('submit', (evt) => {
-        evt.preventDefault();
-        //debug
-        console.log('отменила стандартную отправку форм');
-      });
-      this._setEventListeners();
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
       //debug
-      console.log('повесила слушатель инпута');
+      console.log('отменила стандартную отправку форм');
     });
+    this._setEventListeners();
+    //debug
+    console.log('повесила слушатель инпута');
   };
 }
