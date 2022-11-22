@@ -1,10 +1,10 @@
 export default class Card {
   // make a new card
-  constructor (cardName, cardLink, templateSelector, openPhoto) {
+  constructor ({ cardName, cardLink }, templateSelector, handleCardClick) {
     this._cardName = cardName;
     this._cardLink = cardLink;
     this._templateSelector = templateSelector;
-    this._openPhoto = openPhoto;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -39,7 +39,7 @@ export default class Card {
       this._deleteCard();
     });
     this._zoomPhoto.addEventListener('click', () => {
-      this._openPhoto(this._cardName, this._cardLink);
+      this._handleCardClick(this._cardName, this._cardLink);
     });
   }
 
