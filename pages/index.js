@@ -43,7 +43,8 @@ import UserInfo from '../components/UserInfo.js';
 
 // make a new card
 function makeNewCard(data) {
-  const newCard = new Card({ cardName: data.name, cardLink: data.link }, '#card-template', popupZoom.open.bind(popupZoom));
+  console.log(data);
+  const newCard = new Card({ cardName: data.popup__input_value_place, cardLink: data.popup__input_value_link }, '#card-template', popupZoom.open.bind(popupZoom));
   return newCard.generateCard();
 };
 
@@ -52,10 +53,13 @@ const userInfo = new UserInfo('.profile__name', '.profile__about');
 const popupZoom = new PopupWithImage('.popup_zoom');
 
 const popupAddCard = new PopupWithForm('.popup_card', (data) => {
+  console.log(data);
   photosSection.addItem(makeNewCard(data));
 });
 const popupEdit = new PopupWithForm('.popup_edit', (data) => {
-  userInfo.setUserInfo(data.name, data.about);
+  console.log(data);
+  userInfo.setUserInfo(data.popup__input_value_name, data.popup__input_value_about
+    );
 });
 
 const photosSection = new Section({
@@ -78,8 +82,8 @@ function handleClickEditButton() {
   popupEdit.open();
   const userInfoData = userInfo.getUserInfo();
   popupEdit.setInputValues({
-    name: userInfoData.name,
-    about: userInfoData.about
+    popup__input_value_name: userInfoData.name,
+    popup__input_value_about: userInfoData.about
   });
   addFormEditValidator.enableValidation();
 }
