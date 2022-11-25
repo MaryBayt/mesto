@@ -1,3 +1,5 @@
+import './index.css';
+
 import { initialCards } from '../utils/data.js';
 import { validationConfig, editButton, addCardButton } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
