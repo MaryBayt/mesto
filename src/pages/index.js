@@ -1,7 +1,7 @@
 import './index.css';
 
 import { initialCards } from '../utils/data.js';
-import { validationConfig, editButton, addCardButton } from '../utils/constants.js';
+import { validationConfig, buttonEdit, buttonAddCard } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -16,7 +16,7 @@ function makeNewCard(data) {
   return newCard.generateCard();
 };
 
-const userInfo = new UserInfo('.profile__name', '.profile__about');
+const userInfo = new UserInfo({profileName: '.profile__name', profileAbout: '.profile__about'});
 
 const popupZoom = new PopupWithImage('.popup_zoom');
 
@@ -26,8 +26,7 @@ const popupAddCard = new PopupWithForm('.popup_card', (data) => {
 });
 const popupEdit = new PopupWithForm('.popup_edit', (data) => {
   console.log(data);
-  userInfo.setUserInfo(data.popup__input_value_name, data.popup__input_value_about
-    );
+  userInfo.setUserInfo(data.popup__input_value_name, data.popup__input_value_about);
 });
 
 const photosSection = new Section({
@@ -40,11 +39,11 @@ const photosSection = new Section({
 
 photosSection.renderItems();
 
-const addFormEditValidator = new FormValidator(validationConfig, popupEdit.getForm());
-const addFormAddCardValidator = new FormValidator(validationConfig, popupAddCard.getForm());
+const formEditValidator = new FormValidator(validationConfig, popupEdit.getForm());
+const formAddCardValidator = new FormValidator(validationConfig, popupAddCard.getForm());
 
-addFormEditValidator.enableValidation();
-addFormAddCardValidator.enableValidation();
+formEditValidator.enableValidation();
+formAddCardValidator.enableValidation();
 
 function handleClickEditButton() {
   popupEdit.open();
@@ -53,17 +52,17 @@ function handleClickEditButton() {
     popup__input_value_name: userInfoData.name,
     popup__input_value_about: userInfoData.about
   });
-  addFormEditValidator.enableValidation();
+  formEditValidator.disableSaveButton();
 }
 
 function handleClickAddButton() {
   popupAddCard.open();
-  addFormAddCardValidator.enableValidation();
+  formAddCardValidator.disableSaveButton();
 }
 
 popupAddCard.setEventListeners();
 popupEdit.setEventListeners();
 popupZoom.setEventListeners();
 
-editButton.addEventListener("click", handleClickEditButton);
-addCardButton.addEventListener("click", handleClickAddButton);
+buttonEdit.addEventListener("click", handleClickEditButton);
+buttonAddCard.addEventListener("click", handleClickAddButton);

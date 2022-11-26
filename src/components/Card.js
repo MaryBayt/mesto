@@ -20,8 +20,8 @@ export default class Card {
     this._card = this._getTemplate();
     this._setEventListeners();
 
-    this._card.querySelector('.place__pic').src = this._cardLink;
-    this._card.querySelector('.place__pic').alt = this._cardName;
+    this._zoomPhoto.src = this._cardLink;
+    this._zoomPhoto.alt = this._cardName;
     this._card.querySelector('.place__name').textContent = this._cardName;
 
     return this._card;
@@ -51,5 +51,6 @@ export default class Card {
   // delete card
   _deleteCard() {
     this._card.remove();
+    this._card = null;
   }
 }

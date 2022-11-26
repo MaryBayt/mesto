@@ -10,7 +10,6 @@ export default class FormValidator {
     this._inputErrorClass = config.inputErrorClass;
     this._activeErrorClass = config.activeErrorClass;
     this._formSelector = config.formSelector;
-    this._formList = Array.from(document.querySelectorAll(this._formSelector));
     this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
   }
@@ -100,11 +99,6 @@ export default class FormValidator {
 
   // initial function - prevent standard form behavior and set listeners to each input
   enableValidation () {
-    this._form.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-      //debug
-      console.log('отменила стандартную отправку форм');
-    });
     this._setEventListeners();
     //debug
     console.log('повесила слушатель инпута');
