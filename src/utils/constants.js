@@ -14,7 +14,7 @@ export const buttonAddCard = document.querySelector('.profile__add-button');
 // old const
 
 // // profile name and job
-// const profileName = document.querySelector('.profile__name');
+// const profileName = document.querySelector('.profile__person');
 // const profileJob = document.querySelector('.profile__about');
 
 // edit button
@@ -27,7 +27,7 @@ export const buttonAddCard = document.querySelector('.profile__add-button');
 // // edit form
 
 // // edit form inputs
-// const nameInput = document.querySelector('.popup__input_value_name');
+// const nameInput = document.querySelector('.popup__input_value_person');
 // const jobInput = document.querySelector('.popup__input_value_about');
 
 // add new card button
@@ -39,7 +39,7 @@ export const buttonAddCard = document.querySelector('.profile__add-button');
 // // add form
 
 // // add form inputs
-// const placeInput = document.querySelector('.popup__input_value_place');
+// const placeInput = document.querySelector('.popup__input_value_name');
 // const linkInput = document.querySelector('.popup__input_value_link');
 
 // // place to insert new cards in

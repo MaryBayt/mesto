@@ -10,7 +10,7 @@ export default class PopupWithForm extends Popup {
 
   _getInputValues() {
     return this._inputs.reduce((values, input) => {
-      values[input.name] = input.value;
+      values[input.id] = input.value;
       return values;
       }, {});
   }

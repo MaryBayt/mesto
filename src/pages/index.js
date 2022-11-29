@@ -16,7 +16,7 @@ function makeNewCard(data) {
   return newCard.generateCard();
 };
 
-const userInfo = new UserInfo({profileName: '.profile__name', profileAbout: '.profile__about'});
+const userInfo = new UserInfo({profileName: '.profile__person', profileAbout: '.profile__about'});
 
 const popupZoom = new PopupWithImage('.popup_zoom');
 
@@ -26,7 +26,7 @@ const popupAddCard = new PopupWithForm('.popup_card', (data) => {
 });
 const popupEdit = new PopupWithForm('.popup_edit', (data) => {
   console.log(data);
-  userInfo.setUserInfo(data.popup__input_value_name, data.popup__input_value_about);
+  userInfo.setUserInfo(data.person, data.about);
 });
 
 const photosSection = new Section({
@@ -49,7 +49,7 @@ function handleClickEditButton() {
   popupEdit.open();
   const userInfoData = userInfo.getUserInfo();
   popupEdit.setInputValues({
-    popup__input_value_name: userInfoData.name,
+    popup__input_value_person: userInfoData.person,
     popup__input_value_about: userInfoData.about
   });
   formEditValidator.disableSaveButton();
