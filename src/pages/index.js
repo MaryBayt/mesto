@@ -12,7 +12,7 @@ import UserInfo from '../components/UserInfo.js';
 // make a new card
 function makeNewCard(data) {
   console.log(data);
-  const newCard = new Card({ cardName: data.popup__input_value_place, cardLink: data.popup__input_value_link }, '#card-template', popupZoom.open.bind(popupZoom));
+  const newCard = new Card({ cardName: data.name, cardLink: data.link }, '#card-template', popupZoom.open.bind(popupZoom));
   return newCard.generateCard();
 };
 
