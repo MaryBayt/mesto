@@ -1,0 +1,33 @@
+.profile__picture {
+    border-radius: 50%;
+    margin: 0 30px 0 0;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .profile__picture {
+      margin: 0 0 26px;
+    }
+  }
+
+  .profile__picture:before {
+    background-color: rgba(0, 0, 0, .8);
+    width: 120px;
+    height: 120px;
+    content: "";
+    position: absolute;
+    background-image: url(../../../images/pencil.png);
+    background-size: 26px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    transition: all .5s linear;
+    opacity: 0;
+  }
+  
+  .profile__picture:hover::before {
+    opacity: 1;
+  }

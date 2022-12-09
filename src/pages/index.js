@@ -1,7 +1,7 @@
 import './index.css';
 
 import { initialCards } from '../utils/data.js';
-import { validationConfig, buttonEdit, buttonAddCard } from '../utils/constants.js';
+import { validationConfig, buttonEdit, buttonAddCard, buttonAvatar } from '../utils/constants.js';
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -16,16 +16,20 @@ function makeNewCard(data) {
   return newCard.generateCard();
 };
 
-const userInfo = new UserInfo({profileName: '.profile__person', profileAbout: '.profile__about'});
+const userInfo = new UserInfo({profileName: '.profile__person', profileAbout: '.profile__about', avatar: '.profile__avatar'});
 
 const popupZoom = new PopupWithImage('.popup_zoom');
 
-const popupAddCard = new PopupWithForm('.popup_card', (data) => {
+const popupAvatar = new PopupWithForm('.popup_avatar', (data) => {
   console.log(data);
+  userInfo.setAvatar(data.avatar);
+})
+
+const popupAddCard = new PopupWithForm('.popup_card', (data) => {
   photosSection.addItem(makeNewCard(data));
 });
+
 const popupEdit = new PopupWithForm('.popup_edit', (data) => {
-  console.log(data);
   userInfo.setUserInfo(data.person, data.about);
 });
 
@@ -41,9 +45,11 @@ photosSection.renderItems();
 
 const formEditValidator = new FormValidator(validationConfig, popupEdit.getForm());
 const formAddCardValidator = new FormValidator(validationConfig, popupAddCard.getForm());
+const formAvatarValidator = new FormValidator(validationConfig, popupAvatar.getForm());
 
 formEditValidator.enableValidation();
 formAddCardValidator.enableValidation();
+formAvatarValidator.enableValidation();
 
 function handleClickEditButton() {
   popupEdit.open();
@@ -60,9 +66,16 @@ function handleClickAddButton() {
   formAddCardValidator.disableSaveButton();
 }
 
+function handleClickAvatar() {
+  popupAvatar.open();
+  formAvatarValidator.disableSaveButton();
+}
+
 popupAddCard.setEventListeners();
 popupEdit.setEventListeners();
 popupZoom.setEventListeners();
+popupAvatar.setEventListeners();
 
 buttonEdit.addEventListener("click", handleClickEditButton);
 buttonAddCard.addEventListener("click", handleClickAddButton);
+buttonAvatar.addEventListener("click", handleClickAvatar);

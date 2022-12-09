@@ -5,9 +5,11 @@
 * Figma
 * HTML5
 * CSS3
+* BEM
 * Responsive Layout
 * JavaScript
-* BEM
+* OOP
+* Webpack
 * Git
 
 **Description**

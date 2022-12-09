@@ -10,6 +10,7 @@ export const validationConfig = {
 
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const buttonAddCard = document.querySelector('.profile__add-button');
+export const buttonAvatar = document.querySelector('.profile__picture');
 
 // old const
 

@@ -21,7 +21,9 @@
       <!-- first section - profile -->
       <section class="profile">
         <div class="profile__section">
-          <img src="<%=require('./images/avatar.jpg')%>" alt="фото Жак-Ива Кусто" class="profile__avatar">
+          <div class="profile__picture">
+            <img src="<%=require('./images/avatar.jpg')%>" alt="фото Жак-Ива Кусто" class="profile__avatar">
+          </div>
           <div class="profile__info">
             <h1 class="profile__person">Жак-Ив Кусто</h1>
             <button class="profile__edit-button" name="Редактировать" type="button"></button>
@@ -45,6 +47,19 @@
     <footer class="footer">
       <p class="footer__author" lang="en">© 2020 Mesto Russia</p>
     </footer>
+
+    <!-- popup section - edit avatar -->
+    <section class="popup popup_avatar">
+      <div class="popup__container">
+        <button class="popup__button-close popup__button-close_avatar" type="button" name="Закрыть"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form popup__form_avatar" id="popup__form_avatar" name="popup__form_avatar" novalidate>
+          <input type="url" id="avatar" class="popup__input popup__input_value_avatar" name="popup__input_value_avatar" placeholder="Ссылка на картинку" required>
+          <span id="avatar-error" class="error"></span>
+          <button class="popup__button-save popup__button-save_avatar" type="submit" form="popup__form_avatar" name="Сохранить">Сохранить</button>
+        </form>
+      </div>
+    </section>
 
     <!-- popup section - edit profile -->
     <section class="popup popup_edit">
@@ -73,6 +88,15 @@
           <span id="link-error" class="error"></span>
           <button class="popup__button-save popup__button-save_card" type="submit" form="popup__form_card" name="Сохранить">Сохранить</button>
         </form>
+      </div>
+    </section>
+
+    <!-- popup section - confirm deleting -->
+    <section class="popup popup-delete">
+      <div class="popup__container">
+        <button class="popup__button-close popup__button-close_delete" type="button" name="Закрыть"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button class="popup__button-save popup__button-save_delete" type="submit" name="Да">Да</button>
       </div>
     </section>
 
