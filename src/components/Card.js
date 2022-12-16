@@ -1,10 +1,16 @@
 export default class Card {
   // make a new card
-  constructor ({ cardName, cardLink }, templateSelector, handleCardClick) {
+  constructor ({ cardName, cardLink, likes, id, userId, ownerId }, templateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
     this._cardName = cardName;
     this._cardLink = cardLink;
+    this._likes = likes;
+    this._id = id;
+    this._userId = userId;
+    this._ownerId = ownerId;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDeleteClick = handleDeleteClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
@@ -23,6 +29,10 @@ export default class Card {
     this._zoomPhoto.src = this._cardLink;
     this._zoomPhoto.alt = this._cardName;
     this._card.querySelector('.place__name').textContent = this._cardName;
+    this.setLikes(this._likes);
+    if(this._ownerId !== this._userId) {
+      this._deleteButton.style.display = "none";
+    }
 
     return this._card;
   }
@@ -33,10 +43,10 @@ export default class Card {
     this._zoomPhoto = this._card.querySelector('.place__pic');
 
     this._likeButton.addEventListener('click', () => {
-      this._likeCard();
+      this._handleLikeClick(this._id);
     });
     this._deleteButton.addEventListener('click', () => {
-      this._deleteCard();
+      this._handleDeleteClick(this._id);
     });
     this._zoomPhoto.addEventListener('click', () => {
       this._handleCardClick(this._cardName, this._cardLink);
@@ -44,12 +54,33 @@ export default class Card {
   }
 
   // like photo
+  isLiked() {
+    const userHasLiked = this._likes.find(user => user._id === this._userId);
+    return userHasLiked;
+  }
+
   _likeCard() {
-    this._likeButton.classList.toggle('place__button-like_state_active');
+    this._likeButton.classList.add('place__button-like_state_active');
+  }
+
+  _unlikeCard() {
+    this._likeButton.classList.remove('place__button-like_state_active');
+  }
+
+  setLikes(newLikes) {
+    this._likes = newLikes;
+    const likeCountElement = this._card.querySelector('.place__like-counter');
+    likeCountElement.textContent = this._likes.length;
+
+    if(this.isLiked()) {
+      this._likeCard();
+    } else {
+      this._unlikeCard();
+    }
   }
 
   // delete card
-  _deleteCard() {
+  deleteCard() {
     this._card.remove();
     this._card = null;
   }
