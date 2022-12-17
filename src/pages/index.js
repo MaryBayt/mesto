@@ -74,25 +74,31 @@ const userInfo = new UserInfo({profileName: '.profile__person', profileAbout: '.
 const popupZoom = new PopupWithImage('.popup_zoom');
 
 const popupAvatar = new PopupWithForm('.popup_avatar', (data) => {
+  popupAvatar.changeLoadingText(true);
   api.editAvatar(data.avatar)
     .then(() => {
       console.log(data.avatar);
       userInfo.setAvatar(data.avatar);
     })
+    .finally(() => popupAvatar.changeLoadingText(false));
 })
 
 const popupAddCard = new PopupWithForm('.popup_card', (data) => {
+  popupAddCard.changeLoadingText(true);
   api.addCard(data.name, data.link, data.likes, data._id, userId, data.ownerId)
     .then((data) => {
       photosSection.addItem(makeNewCard(data));
     })
+    .finally(() => popupAddCard.changeLoadingText(false));
 });
 
 const popupEdit = new PopupWithForm('.popup_edit', (data) => {
+  popupEdit.changeLoadingText(true);
   api.editProfile(data.person, data.about)
     .then(() => {
       userInfo.setUserInfo(data.person, data.about);
     })
+    .finally(() => popupEdit.changeLoadingText(false));
 });
 
 const popupDelete = new PopupWithForm('.popup_delete', () => {
