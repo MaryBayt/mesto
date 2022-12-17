@@ -29,6 +29,7 @@ export default class Card {
     this._zoomPhoto.src = this._cardLink;
     this._zoomPhoto.alt = this._cardName;
     this._card.querySelector('.place__name').textContent = this._cardName;
+    this._likeCountElement = this._card.querySelector('.place__like-counter');
     this.setLikes(this._likes);
     if(this._ownerId !== this._userId) {
       this._deleteButton.style.display = "none";
@@ -69,8 +70,7 @@ export default class Card {
 
   setLikes(newLikes) {
     this._likes = newLikes;
-    const likeCountElement = this._card.querySelector('.place__like-counter');
-    likeCountElement.textContent = this._likes.length;
+    this._likeCountElement.textContent = this._likes.length;
 
     if(this.isLiked()) {
       this._likeCard();
