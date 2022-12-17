@@ -18,6 +18,7 @@ api.getProfile()
     userInfo.setAvatar(res.avatar);
     userId = res._id;
   })
+  .catch(err => console.log(`Ошибка.....: ${err}`))
 
 api.getInitialCards()
   .then(cardList => {
@@ -25,6 +26,7 @@ api.getInitialCards()
       photosSection.addItem(makeNewCard(data));
     })
   })
+  .catch(err => console.log(`Ошибка.....: ${err}`))
 
 // make a new card
 function makeNewCard(data) {
@@ -48,6 +50,7 @@ function makeNewCard(data) {
           .then(res => {
             newCard.deleteCard()
           })
+          .catch(err => console.log(`Ошибка.....: ${err}`))
       });
     },
     (id) => {
@@ -57,12 +60,14 @@ function makeNewCard(data) {
             console.log(res);
             newCard.setLikes(res.likes)
           })
+          .catch(err => console.log(`Ошибка.....: ${err}`))
       } else {
         api.addLike(id)
           .then(res => {
             console.log(res);
             newCard.setLikes(res.likes)
           })
+          .catch(err => console.log(`Ошибка.....: ${err}`))
       } 
     }
   );
@@ -80,6 +85,7 @@ const popupAvatar = new PopupWithForm('.popup_avatar', (data) => {
       console.log(data.avatar);
       userInfo.setAvatar(data.avatar);
     })
+    .catch(err => console.log(`Ошибка.....: ${err}`))
     .finally(() => popupAvatar.changeLoadingText(false));
 })
 
@@ -89,6 +95,7 @@ const popupAddCard = new PopupWithForm('.popup_card', (data) => {
     .then((data) => {
       photosSection.addItem(makeNewCard(data));
     })
+    .catch(err => console.log(`Ошибка.....: ${err}`))
     .finally(() => popupAddCard.changeLoadingText(false));
 });
 
@@ -98,6 +105,7 @@ const popupEdit = new PopupWithForm('.popup_edit', (data) => {
     .then(() => {
       userInfo.setUserInfo(data.person, data.about);
     })
+    .catch(err => console.log(`Ошибка.....: ${err}`))
     .finally(() => popupEdit.changeLoadingText(false));
 });
 
@@ -107,6 +115,7 @@ const popupDelete = new PopupWithForm('.popup_delete', () => {
     .then(res => {
       console.log('res', res);
     })
+    .catch(err => console.log(`Ошибка.....: ${err}`))
 })
 
 const photosSection = new Section({
