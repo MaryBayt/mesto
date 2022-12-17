@@ -12,21 +12,24 @@ import { api } from '../components/Api.js';
 
 let userId;
 
-api.getProfile()
-  .then(res => {
-    userInfo.setUserInfo(res.name, res.about);
-    userInfo.setAvatar(res.avatar);
-    userId = res._id;
-  })
-  .catch(err => console.log(`Ошибка.....: ${err}`))
+Promise.all([
+    api.getProfile(),
+    api.getInitialCards()
+])
 
-api.getInitialCards()
-  .then(cardList => {
-    cardList.forEach((data) => {
-      photosSection.addItem(makeNewCard(data));
-    })
-  })
-  .catch(err => console.log(`Ошибка.....: ${err}`))
+.then(([userData, cardList])=>{
+  userInfo.setUserInfo(userData.name, userData.about);
+  userInfo.setAvatar(userData.avatar);
+  userId = userData._id;
+  const reverseCards = cardList.reverse();
+  reverseCards.forEach((data) => {
+    photosSection.addItem(makeNewCard(data));
+  });
+})
+
+.catch((err)=>{
+    console.log(err);
+}) 
 
 // make a new card
 function makeNewCard(data) {
