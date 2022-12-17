@@ -48,7 +48,8 @@ function makeNewCard(data) {
       popupDelete.changeSubmitCallback(() => {
         api.deleteCard(_id)
           .then(res => {
-            newCard.deleteCard()
+            newCard.deleteCard();
+            popupDelete.close();
           })
           .catch(err => console.log(`Ошибка.....: ${err}`))
       });
@@ -84,6 +85,7 @@ const popupAvatar = new PopupWithForm('.popup_avatar', (data) => {
     .then(() => {
       console.log(data.avatar);
       userInfo.setAvatar(data.avatar);
+      popupAvatar.close();
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
     .finally(() => popupAvatar.changeLoadingText(false));
@@ -94,6 +96,7 @@ const popupAddCard = new PopupWithForm('.popup_card', (data) => {
   api.addCard(data.name, data.link)
     .then((data) => {
       photosSection.addItem(makeNewCard(data));
+      popupAddCard.close();
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
     .finally(() => popupAddCard.changeLoadingText(false));
@@ -104,6 +107,7 @@ const popupEdit = new PopupWithForm('.popup_edit', (data) => {
   api.editProfile(data.person, data.about)
     .then(() => {
       userInfo.setUserInfo(data.person, data.about);
+      popupEdit.close();
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
     .finally(() => popupEdit.changeLoadingText(false));
