@@ -6,6 +6,7 @@ import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import { api } from '../components/Api.js';
@@ -41,17 +42,7 @@ function makeNewCard(data) {
     '#card-template', 
     popupZoom.open.bind(popupZoom),
     (_id) => {
-      // console.log('clicked button!');
-      console.log("It's me: " + _id);
-      popupDelete.open();
-      popupDelete.changeSubmitCallback(() => {
-        api.deleteCard(_id)
-          .then(() => {
-            newCard.deleteCard();
-            popupDelete.close();
-          })
-          .catch(err => console.log(`Ошибка.....: ${err}`))
-      });
+      popupDelete.open({_id, callback: newCard.deleteCard.bind(newCard)});
     },
     (id) => {
       if(newCard.isLiked()) {
@@ -87,7 +78,7 @@ const popupAvatar = new PopupWithForm('.popup_avatar', (data) => {
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
     .finally(() => popupAvatar.changeLoadingText(false));
-})
+});
 
 const popupAddCard = new PopupWithForm('.popup_card', (data) => {
   popupAddCard.changeLoadingText(true);
@@ -111,14 +102,15 @@ const popupEdit = new PopupWithForm('.popup_edit', (data) => {
     .finally(() => popupEdit.changeLoadingText(false));
 });
 
-const popupDelete = new PopupWithForm('.popup_delete', () => {
-  // console.log('DELETE ME!!!');
-  api.deleteCard(id)
-    .then((res) => {
-      console.log('res', res);
+const popupDelete = new PopupWithConfirmation('.popup_delete', ({ _id, callback }) => {
+  api.deleteCard(_id)
+    .then(() => {
+      callback();
+      popupDelete.close();
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
-})
+  }
+);
 
 const photosSection = new Section((item) => {
     photosSection.addItem(makeNewCard(item));
@@ -142,17 +134,17 @@ function handleClickEditButton() {
     popup__input_value_about: userInfoData.about
   });
   formEditValidator.disableSaveButton();
-}
+};
 
 function handleClickAddButton() {
   popupAddCard.open();
   formAddCardValidator.disableSaveButton();
-}
+};
 
 function handleClickAvatar() {
   popupAvatar.open();
   formAvatarValidator.disableSaveButton();
-}
+};
 
 popupAddCard.setEventListeners();
 popupEdit.setEventListeners();

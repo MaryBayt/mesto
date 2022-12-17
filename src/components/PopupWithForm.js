@@ -17,10 +17,6 @@ export default class PopupWithForm extends Popup {
       }, {});
   }
 
-  changeSubmitCallback(newSubmitCallback) {
-    this._submitCallback = newSubmitCallback;
-  }
-
   setInputValues(values) {
     this._inputs.forEach((input) => {
       if (values[input.name]) {
