@@ -85,7 +85,7 @@ const popupAvatar = new PopupWithForm('.popup_avatar', (data) => {
 
 const popupAddCard = new PopupWithForm('.popup_card', (data) => {
   popupAddCard.changeLoadingText(true);
-  api.addCard(data.name, data.link, data.likes, data._id, userId, data.ownerId)
+  api.addCard(data.name, data.link)
     .then((data) => {
       photosSection.addItem(makeNewCard(data));
     })
