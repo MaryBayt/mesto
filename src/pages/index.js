@@ -46,7 +46,7 @@ function makeNewCard(data) {
       popupDelete.open();
       popupDelete.changeSubmitCallback(() => {
         api.deleteCard(_id)
-          .then(res => {
+          .then(() => {
             newCard.deleteCard();
             popupDelete.close();
           })
@@ -56,14 +56,14 @@ function makeNewCard(data) {
     (id) => {
       if(newCard.isLiked()) {
         api.deleteLike(id)
-          .then(res => {
+          .then((res) => {
             console.log(res);
             newCard.setLikes(res.likes)
           })
           .catch(err => console.log(`Ошибка.....: ${err}`))
       } else {
         api.addLike(id)
-          .then(res => {
+          .then((res) => {
             console.log(res);
             newCard.setLikes(res.likes)
           })
@@ -81,9 +81,8 @@ const popupZoom = new PopupWithImage('.popup_zoom');
 const popupAvatar = new PopupWithForm('.popup_avatar', (data) => {
   popupAvatar.changeLoadingText(true);
   api.editAvatar(data.avatar)
-    .then(() => {
-      console.log(data.avatar);
-      userInfo.setAvatar(data.avatar);
+    .then((res) => {
+      userInfo.setAvatar(res.avatar);
       popupAvatar.close();
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
@@ -104,8 +103,8 @@ const popupAddCard = new PopupWithForm('.popup_card', (data) => {
 const popupEdit = new PopupWithForm('.popup_edit', (data) => {
   popupEdit.changeLoadingText(true);
   api.editProfile(data.person, data.about)
-    .then(() => {
-      userInfo.setUserInfo(data.person, data.about);
+    .then((res) => {
+      userInfo.setUserInfo(res.name, res.about);
       popupEdit.close();
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
@@ -115,7 +114,7 @@ const popupEdit = new PopupWithForm('.popup_edit', (data) => {
 const popupDelete = new PopupWithForm('.popup_delete', () => {
   // console.log('DELETE ME!!!');
   api.deleteCard(id)
-    .then(res => {
+    .then((res) => {
       console.log('res', res);
     })
     .catch(err => console.log(`Ошибка.....: ${err}`))
