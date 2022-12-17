@@ -16,17 +16,13 @@ Promise.all([
     api.getProfile(),
     api.getInitialCards()
 ])
-
 .then(([userData, cardList])=>{
   userInfo.setUserInfo(userData.name, userData.about);
   userInfo.setAvatar(userData.avatar);
   userId = userData._id;
-  const reverseCards = cardList.reverse();
-  reverseCards.forEach((data) => {
-    photosSection.addItem(makeNewCard(data));
-  });
+  const cardsReversed = cardList.reverse();
+  photosSection.renderItems(cardsReversed);
 })
-
 .catch((err)=>{
     console.log(err);
 }) 
@@ -125,15 +121,11 @@ const popupDelete = new PopupWithForm('.popup_delete', () => {
     .catch(err => console.log(`Ошибка.....: ${err}`))
 })
 
-const photosSection = new Section({
-  items: [],
-  renderer: (item) => {
+const photosSection = new Section((item) => {
     photosSection.addItem(makeNewCard(item));
-  }},
+  },
   '.places__list'
 );
-
-photosSection.renderItems();
 
 const formEditValidator = new FormValidator(validationConfig, popupEdit.getForm());
 const formAddCardValidator = new FormValidator(validationConfig, popupAddCard.getForm());
